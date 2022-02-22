@@ -1,4 +1,4 @@
-# MIA 2020 Shared Task on Cross-lingual Open-Retrieval Question Answering. 
+# MIA 2022 Shared Task on Cross-lingual Open-Retrieval Question Answering. 
 
 ### Quick Links
 
