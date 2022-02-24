@@ -14,6 +14,7 @@
 Our train and evaluation data files are `jsonlines`, each of which contains a list of a json data with `id`, `question`, `lang`, `answers`, `split`, `source` (i.e., `nq` for the data from Natural Questions, `xor-tydi` for the data from XOR-TyDi QA and `mkqa` for the data from MKQA).  
 
 e.g., 
+- Natural Questions training data 
 ```
 {
     'id': '-6802534628745605728',
@@ -23,7 +24,10 @@ e.g.,
     'split': 'train',
     'source': 'nq'
 }
+```
 
+- XOR-TyDi QA training data (with answers in the target language)
+```
 {
     'id': '7931051574381133444', 
     'question': '『指輪物語』はいつ出版された', 
@@ -34,6 +38,7 @@ e.g.,
 }
 ```
 
+- XOR-TyDi QA training data (without answers in the target language)
 Note that the part of the XOR-TyDi data only includes English answers due to the limitation of annotation resources ([Asai et al., 2021](https://nlp.cs.washington.edu/xorqa/)). Those questions are marked as `has_eng_answer_only: True` 
 
 ```
