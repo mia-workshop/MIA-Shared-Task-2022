@@ -5,7 +5,7 @@
 - [Datasets](#datasets)
 - [Download](#download)
 - [Evaluate](#evaluate)
-- [Baseline](#baseline-model)
+- [Baseline](#baseline)
 - [Submission](#submission)
 
 ## Datasets
