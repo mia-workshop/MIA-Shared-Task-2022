@@ -3,8 +3,8 @@
 ### Quick Links
 
 - [Datasets](#datasets)
-- [Download](#download-scripts)
-- [Evaluate](#evaluation)
+- [Download](#download)
+- [Evaluate](#evaluate)
 - [Baseline](#baseline-model)
 - [Submission](#submission)
 
@@ -94,7 +94,7 @@ For the **unconstrained** setup, you may use additional human-annotated question
 Please note that participants using additional human-annotated question-answer data must clarify it and provide the details of the additional resources used during the training. 
 
 
-## Download-scripts
+## Download
 You can download the training and evaluation data by running the command below. The test data will be release late March. 
 
 - Training data 
@@ -113,7 +113,7 @@ wget
 wget 
 
 ```
-## Evaluations
+## Evaluate
 
 Participants will run their systems on the evaluation files (without answer data) and then submit their predictions to our competition site hosted at eval.ai. Systems will first be evaluated using automatic metrics: **Exact match (EM)** and **token-level F1**. Although EM is often used as a primarily evaluate metric for English open-retrieval QA, the risk of surface-level mismatching (Min et al., 2021) can be more pervasive in cross-lingual open-retrieval QA. Therefore, we will use F1 as our primary metric and rank systems using their macro averaged F1 scores.
 
@@ -143,14 +143,14 @@ Your prediction file is a `json` file including a dictionary where the keys are 
 {"7931051574381133444": "1954年から1955年", "-6802534628745605728": "2,718", ... }:
 ```
 
-## Baseline Models
+## Baseline
 Our baseline model is the state-of-the-art [CORA]() which runs a multilingual DPR model to retrieve documents from many different languages and then generate the final answers in the target languages using a multilingual seq2seq generation models. 
 
 For those who want to focus on single component of the task, we release the retrieved results from mDPR. 
 
 We also release translation results for the evaluation dataset by MT models for MKQA and XOR-TyDi QA evaluation set. 
 
-## Submissions
+## Submission
 To be considered for the prizes, you have to submit predictions for all of the target languages included in XOR-TYDi and MKQA. Please format the data in the following way:
 ```
 {"xor-tydi: {}, "mkqa-ar": {}, ....}
