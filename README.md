@@ -1,4 +1,13 @@
 # MIA 2022 Shared Task on Cross-lingual Open-Retrieval Question Answering. 
+This is an official repository for MIA 2022 Shared Task on Cross-lingual Open-Retrieval Question Answering. Please refer the details in [our Shared Task call](https://mia-workshop.github.io/shared_task.html).  
+
+Cross-lingual Open Question Answering is a challenging multilingual NLP task, where given questions are written in a user’s preferred language, a system needs to find evidence in large-scale document collections written in many different languages, and return an answer in the user’s preferred language, as indicated by their question. 
+
+We evaluate models' performance in 14 languages, 7 of which will not be covered in our training data. 
+
+The full list of the languages:
+- Languages with training data: Arabic, Bengali, English Finnish, Japanese, Korean, Russian, Telugu
+- Languages without training data: Spanish, Khmer, Malay, Swedish, Turkish, Chinese (simplified)
 
 ### Quick Links
 
@@ -60,13 +69,14 @@ For this shared task, we re-split development and test data, and conduct additio
 - The number of the examples in XOR-TyDi development and test data is as follows:
 
 | Language | dev | test |
-| `ar` |   | |
-| `bn` |   | |
-| `fi` |   | |
-| `ja` |   | |
-| `ko` |   | |
-| `ru` |   | |
-| `te` |   | |
+| :-----: | :-------:| :------: |
+| `ar` |  590 | 1387 |
+| `bn` |  203 | 490 |
+| `fi` |  1368 | 974 |
+| `ja` |  1056 | 693 |
+| `ko` |  1048 | 473 |
+| `ru` |  910 | 1018 |
+| `te` |  873 | 564 |
 
 - MKQA development has 1,758 questions per language, and 5,000 questions per language. All of the questions are parallel across different languages. 
 
@@ -91,11 +101,7 @@ The training data can be downloaded at [this link](https://drive.google.com/file
 We also release the training data for our DPR-based baseline, which is created by collecting training for Natural Questions available at [DPR repo](https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-nq-train.json.gz) and [XOR-TyDI gold paragraph data](https://nlp.cs.washington.edu/xorqa/XORQA_site/data/xorqa_reading_comprehension_format.zip).  Please see the details in the `baseline` section. 
 
 #### Unconstrained Setup
-For the **unconstrained** setup, you may use additional human-annotated question answering data. Yet, you must not use development data of Natural Questions, TyDi QA or XOR-TyDi QA for training. We also list the ids of the questions you should not use during training. 
-
-- [Natural Questions]()
-- [TyDi QA]()
-
+For the **unconstrained** setup, you may use additional human-annotated question answering data. Yet, you must not use additional data from Natural Questions or XOR-TyDi QA for training. 
 Please note that participants using additional human-annotated question-answer data must clarify it and provide the details of the additional resources used during the training. 
 
 
@@ -104,33 +110,44 @@ You can download the training and evaluation data by running the command below. 
 
 - Training data 
 ```
-wget 
-
+wget https://nlp.cs.washington.edu/xorqa/XORQA_site/data/mia_2022_train_data.jsonl
 ```
 - Evaluation data (XOR-TyDi) 
 ```
-wget 
-
+wget https://nlp.cs.washington.edu/xorqa/XORQA_site/data/mia_2022_eval_data_dev.jsonl
 ```
 
 - Evaluation data (MKQA) 
 ```
-wget 
-
+wget https://nlp.cs.washington.edu/xorqa/XORQA_site/data/mia_2022_eval_mkqa.zip
 ```
 ## Evaluate
 
 Participants will run their systems on the evaluation files (without answer data) and then submit their predictions to our competition site hosted at eval.ai. Systems will first be evaluated using automatic metrics: **Exact match (EM)** and **token-level F1**. Although EM is often used as a primarily evaluate metric for English open-retrieval QA, the risk of surface-level mismatching (Min et al., 2021) can be more pervasive in cross-lingual open-retrieval QA. Therefore, we will use F1 as our primary metric and rank systems using their macro averaged F1 scores.
 
+Due to the difference of the datasets' nature, we will calculate macro-average scores on XOR-TyDi and MKQA datasets, and then take the average of the XOR-TyDi QA average {F1, EM} and MKQA average {F1, EM}.
+
+### Dependencies
 For non-spacing languages (i.e., Japanese, Khmer and Chinese) we use token-level tokenizers, Mecab, khmernltk and jieba to tokenize both predictions and ground-truth answers.
 
 Please install the following libraries to run the evaluation scripts:
 ```
-pip install 
+pip install jieba
+pip install khmernltk
+pip install pythainlp
+ppip install mecab-python3
 ```
 
-Due to the difference of the datasets' nature, we will calculate macro-average scores on XOR-TyDi and MKQA datasets, and then take the average of the XOR-TyDi QA average {F1, EM} and MKQA average {F1, EM}.
+Please use python 3.x to run the evaluation scripts.
 
+### Prediction file format
+Your prediction file is a `json` file including a dictionary where the keys are corresponding to the question ids and the values are the answers. 
+
+```
+{"7931051574381133444": "1954年から1955年", "-6802534628745605728": "2,718", ... }:
+```
+
+### Evaluation Scripts
 Please run the command below to evaluate your models' performance on MKQA and XOR-TyDi QA. 
 
 ```
@@ -138,27 +155,43 @@ python eval_xor.py --data_file /path/to/your/data/file --pred_file /path/to/pred
 ```
 
 For MKQA, you can run the command above for each language or you can run the command below that takes directory names of the prediction files and input data files.
-```
-python eval_mkqa_all.py
-```
-
-Your prediction file is a `json` file including a dictionary where the keys are corresponding to the question ids and the values are the answers. 
 
 ```
-{"7931051574381133444": "1954年から1955年", "-6802534628745605728": "2,718", ... }:
+python eval_mkqa_all.py --data_dir /path/to/data/dir --pred_dir /path/to/pred/files/dir 
 ```
+You can limit the target languages by setting the `--target` option. You can add the target languages' language codes (e.g., `--target en es sw`)
+
 
 ## Baseline
-Our baseline model is the state-of-the-art [CORA]() which runs a multilingual DPR model to retrieve documents from many different languages and then generate the final answers in the target languages using a multilingual seq2seq generation models. 
+The baseline codes are available at [baseline](baseline)
+Our baseline model is the state-of-the-art [CORA](https://github.com/AkariAsai/CORA), which runs a multilingual DPR model to retrieve documents from many different languages and then generate the final answers in the target languages using a multilingual seq2seq generation models. 
 
 For those who want to focus on single component of the task, we release the retrieved results from mDPR. 
 
 We also release translation results for the evaluation dataset by MT models for MKQA and XOR-TyDi QA evaluation set. 
 
 ## Submission
-To be considered for the prizes, you have to submit predictions for all of the target languages included in XOR-TYDi and MKQA. Please format the data in the following way:
+To be considered for the prizes, you have to submit predictions for all of the target languages included in XOR-TYDi and MKQA. A valid submission data is a dictionary with the following keys and the corresponding prediction results in the format discussed in the [Evaluation](#evaluate) section.
+
+- `xor-tydi`
+- `mkqa-ar` 
+- `mkqa-en`
+- `mkqa-es`
+- `mkqa-fi`
+- `mkqa-ja`
+- `mkqa-km`
+- `mkqa-ko`
+- `mkqa-ms`
+- `mkqa-ru`
+- `mkqa-sv`
+- `mkqa-tr`
+- `mkqa-zh_cn`
+
 ```
-{"xor-tydi: {}, "mkqa-ar": {}, ....}
+{"xor-tydi: {...}, "mkqa_ar": {...}, "mkqa_ja": {...}}
 
 ```
 Once you create your submission files, please go to [our competition website]() at eval.ai. 
+
+## Contact
+If you have any questions, please feel free to email (`akari[at]cs.washington.edu`) or start a Github issue with a mention to `@AkariAsai]` or `@shayne-longpre`
