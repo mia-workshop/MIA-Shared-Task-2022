@@ -135,7 +135,7 @@ Please install the following libraries to run the evaluation scripts:
 pip install jieba
 pip install khmernltk
 pip install pythainlp
-ppip install mecab-python3
+pip install mecab-python3
 ```
 
 Please use python 3.x to run the evaluation scripts.
@@ -189,7 +189,6 @@ To be considered for the prizes, you have to submit predictions for all of the t
 
 ```
 {"xor-tydi: {...}, "mkqa_ar": {...}, "mkqa_ja": {...}}
-
 ```
 Once you create your submission files, please go to [our competition website]() at eval.ai. 
 
