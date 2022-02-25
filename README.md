@@ -6,9 +6,8 @@ Cross-lingual Open Question Answering is a challenging multilingual NLP task, wh
 We evaluate models' performance in 14 languages, 7 of which will not be covered in our training data. 
 
 The full list of the languages:
-- Languages with training data: Arabic, Bengali, English Finnish, Japanese, Korean, Russian, Telugu
-- Languages without training data: Spanish, Khmer, Malay, Swedish, Turkish, Chinese (simplified)
-
+- Languages with training data: Arabic (`ar`), Bengali (`bn`), English (`en`), Finnish (`fi`), Japanese (`ja`), Korean (`ko`), Russian (`ru`), Telugu (`te`)
+- Languages without training data: Spanish (`es`), Khmer (`km`), Malay (`ms`), Swedish (`es`), Turkish (`tr`), Chinese (simplified) (`zh-cn`)
 ### Quick Links
 
 - [Datasets](#datasets)
@@ -66,7 +65,12 @@ The shared task valuation data is originally from [XOR-TyDi QA](https://nlp.cs.w
 and [MKQA](https://github.com/apple/ml-mkqa)[(Longpre et al., 2021)](https://arxiv.org/abs/2007.15207). 
 
 For this shared task, we re-split development and test data, and conduct additional answer normalizations, so the number on our shared task data is not directly comparable to the results on those datasets in prior paper. 
-- The number of the examples in XOR-TyDi development and test data is as follows:
+
+*NOTE: Test data will be released in March.*
+#### MIA 2022 XOR-TyDi QA data 
+The data is available at [data/mia_2022_dev_xorqa.jsonl](https://github.com/mia-workshop/MIA-Shared-Task-2022/tree/main/data/eval/mia_2022_dev_xorqa.jsonl). 
+
+The number of the examples in XOR-TyDi development and test data is as follows:
 
 | Language | dev | test |
 | :-----: | :-------:| :------: |
@@ -78,14 +82,29 @@ For this shared task, we re-split development and test data, and conduct additio
 | `ru` |  910 | 1018 |
 | `te` |  873 | 564 |
 
-- MKQA development has 1,758 questions per language, and 5,000 questions per language. All of the questions are parallel across different languages. 
+#### MIA 2022 Shared Task MKQA data
+
+The data is available at [data/eval/mkqa_dev.zip]https://github.com/mia-workshop/MIA-Shared-Task-2022/blob/main/data/eval/mkqa_dev.zip). 
+
+```
+cd data/eval
+unzip mkqa_dev.zip
+```
+MKQA development has 1,758 questions per language, and 5,000 questions per language. All of the questions are parallel across different languages. 
+
+Each file contains questions for each target language.
 
 
 ### Training Data
 #### Constrained Setup
 Our training data for the **constrained** setup consists of English open-QA data from Natural Questions-open ([Kwiatkowski et al., 2019](https://research.google/pubs/pub47761/); [Lee et al., 2019](https://arxiv.org/abs/1906.00300)) and the XOR-TyDi QA train data. 
 
-The training data can be downloaded at [this link](https://drive.google.com/file/d/16XSf26qS0pFPpNSRarhymGbjNYKQMwvy/view?usp=sharing). 
+The training is available at [data/train/mia_2022_train_data.jsonl.zip](https://github.com/mia-workshop/MIA-Shared-Task-2022/blob/main/data/train/mia_2022_train_data.jsonl.zip). 
+
+```
+cd data/train
+unzip mia_2022_train_data.jsonl.zip
+```
 
 | Dataset | Language | # of Examples |
 | :-----: | :-------:| :------: |
@@ -105,22 +124,7 @@ For the **unconstrained** setup, you may use additional human-annotated question
 Please note that participants using additional human-annotated question-answer data must clarify it and provide the details of the additional resources used during the training. 
 
 
-## Download
-You can download the training and evaluation data by running the command below. The test data will be release late March. 
 
-- Training data 
-```
-wget https://nlp.cs.washington.edu/xorqa/XORQA_site/data/mia_2022_train_data.jsonl
-```
-- Evaluation data (XOR-TyDi) 
-```
-wget https://nlp.cs.washington.edu/xorqa/XORQA_site/data/mia_2022_eval_data_dev.jsonl
-```
-
-- Evaluation data (MKQA) 
-```
-wget https://nlp.cs.washington.edu/xorqa/XORQA_site/data/mia_2022_eval_mkqa.zip
-```
 ## Evaluate
 
 Participants will run their systems on the evaluation files (without answer data) and then submit their predictions to our competition site hosted at eval.ai. Systems will first be evaluated using automatic metrics: **Exact match (EM)** and **token-level F1**. Although EM is often used as a primarily evaluate metric for English open-retrieval QA, the risk of surface-level mismatching (Min et al., 2021) can be more pervasive in cross-lingual open-retrieval QA. Therefore, we will use F1 as our primary metric and rank systems using their macro averaged F1 scores.
