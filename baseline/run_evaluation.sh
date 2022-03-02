@@ -25,6 +25,7 @@ done
 cd ../..
 
 # Run mDPR
+pip install transformers==3.0.2
 cd mDPR
 python dense_retriever.py \
     --model_file ../models/mDPR_biencoder_best.cpt \
@@ -43,6 +44,7 @@ python3 convert_dpr_retrieval_results_to_seq2seq.py \
     --top_n 15 \
 
 # Run mGEN
+pip install transformers==4.2.1
 CUDA_VISIBLE_DEVICES=0 python eval_mgen.py \
     --model_name_or_path \
     --evaluation_set xorqa_dev_final_retriever_results/val.source \
