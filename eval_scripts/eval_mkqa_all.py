@@ -115,7 +115,7 @@ def calculate_f1_em_bleu(dataset, predictions):
         gts = qa["answers"]
         if gts[0] == "No Answer":
             continue
-        q_id = qa["id"].split("_")[0]
+        q_id = qa["id"]
 
         lang_dict[lang]["count"] += 1
         if q_id not in predictions:
@@ -182,13 +182,17 @@ def main():
             continue
         dataset = read_jsonlines(os.path.join(args.data_dir, "mkqa-{}.jsonl".format(lang)))
         # fix file path
+        # need to fix the file path
         if args.txt_file is True:
-            tmp_preds = open(pred_file).read().split("\n")
+            tmp_preds = open(os.path.join(args.pred_dir, "mgen_pred_{}.txt".format(lang))).read().split("\n")
             predictions = {}
             for item, pred in zip(dataset, tmp_preds):
                 predictions[item["id"]] = pred
+             
         else:
-            predictions = json.load(open(os.path.join(args.pred_dir, "mkqa_final_pred_{}_cora.json".format(lang))))
+            print(os.path.join(args.pred_dir, "mkqa_pred_{}.json".format(lang)))
+            predictions = json.load(open(os.path.join(args.pred_dir, "mkqa_pred_{}.json".format(lang))))
+
         results = calculate_f1_em_bleu(dataset, predictions)
         results_all[lang] = results[lang]
 

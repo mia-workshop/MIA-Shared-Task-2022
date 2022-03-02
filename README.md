@@ -100,6 +100,7 @@ Each file contains questions for each target language.
 Our training data for the **constrained** setup consists of English open-QA data from Natural Questions-open ([Kwiatkowski et al., 2019](https://research.google/pubs/pub47761/); [Lee et al., 2019](https://arxiv.org/abs/1906.00300)) and the XOR-TyDi QA train data. 
 
 The training is available at [data/train/mia_2022_train_data.jsonl.zip](https://github.com/mia-workshop/MIA-Shared-Task-2022/blob/main/data/train/mia_2022_train_data.jsonl.zip). 
+We encourage participants to do data augmentation using Machine Translation or structured knowledge sources (e.g., Wikidata, Wikipedia interlanguage links), and as long as you do not use additional human annotated QA data or data, you submissions will be considered as constrained setup.
 
 ```
 cd data/train
@@ -167,34 +168,54 @@ You can limit the target languages by setting the `--target` option. You can add
 
 
 ## Baseline
-The baseline codes are available at [baseline](baseline)
-Our baseline model is the state-of-the-art [CORA](https://github.com/AkariAsai/CORA), which runs a multilingual DPR model to retrieve documents from many different languages and then generate the final answers in the target languages using a multilingual seq2seq generation models. 
-
-For those who want to focus on single component of the task, we release the retrieved results from mDPR. 
+The baseline codes are available at [baseline](baseline). 
+Our baseline model is the state-of-the-art [CORA](https://github.com/AkariAsai/CORA), which runs a multilingual DPR model to retrieve documents from many different languages and then generate the final answers in the target languages using a multilingual seq2seq generation models. We have two versions:
+1. **CORA with iterative training**: We run the publicly available CORA's trained models on our evaluation set. We generate dense embeddings for all of the target languages using their mDPR bi encoders as some of the languages (e.g., Chinese - simplified) are not covered by the CORA's original embeddings. The original COPRA models are trained via their new iterative training framework. We also release the retrieval results of this models [here](). 
+2. **CORA without iterative training**: We train mDPR and mGEN without iterative training process. 
+3. **BPR (Yamada et al., 2021)**: When we increases the retrieval target to more languages, the inference latency and storage requirements increases quickly. We will plan to introduce a new baseline using Binary Passage Retriever (**BP**R; [Yamada et al., 2021](https://arxiv.org/abs/2106.00882)) as a memory efficient baseline. 
 
 We also release translation results for the evaluation dataset by MT models for MKQA and XOR-TyDi QA evaluation set. 
 
+### Results of Baselines 
+The results on the development set of Baseline (1) are below. We will add the results of other baselines shortly. The predictions results are available at [MIA2022_sample_predictions](https://drive.google.com/drive/folders/11SewNZ8v_KV4lEE3zFVpHkkBHyuMTI5W?usp=sharing). 
+
+We also release the mDPR retrieval results for dev and test set, and will release the mDPR results for the training set upon request. 
+You can download the mDPR results from: 
+```
+wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_mDPR_results_xor_mkqa_dev.zip
+```
+
+#### Final results 
+
+- XOR QA (sample prediction file: [`xor_dev_output.json`](https://drive.google.com/file/d/18VKYStO8s0_bW-R-gzdHbCBdOEVdRJIX/view?usp=sharing))
+| Language | F1 | EM |
+| :-----: | :-------:| :------: |
+| Arabic (`ar`) | 51.3 |  36.0 |
+| Bengali (`bn`) | 28.7 | 20.2 |
+| Finnish (`fi`) | 44.4 | 35.7 |
+| Japanese (`ja` )| 43.2 | 32.2 |
+| Korean (`ko`) |  29.8 | 23.7 |
+| Russian (`ru`) |  40.7 | 31.9 |
+| Telugu (`te`) |  40.2 | 32.1 |
+
+- MKQA (sample prediction file: [`mkqa_dev_output.zip`](https://drive.google.com/file/d/1P1VHyQgdzQW4EeQtwvmy34luwB6xDq06/view?usp=sharing))
+| Language | F1 | EM |
+| :-----: | :-------:| :------: |
+| Arabic (`ar`) | 8.8  | 5.7 |
+| English (`en`) | 27.9 | 24.5 |
+| Spanish (`es`) | 24.9 | 20.9 |
+| Finnish (`fi`) | 23.3 | 20.0 |
+| Japanese (`ja`) | 15.2 | 6.3 |
+| Khmer (`km`) |  5.7 | 4.9 |
+| Korean (`ko`) |  8.3 | 6.3 |
+| Malaysian (`ms`) | 22.6  |19.7 |
+| Russian (`ru`) | 14.0  | 9.4 |
+| Swedish (`sv`) |  24.1 | 21.1|
+| Turkish (`tr`) |  20.6 | 16.7 |
+| Chinese-simplified (`zh_cn`) | 13.1  | 6.1 |
+
 ## Submission
-To be considered for the prizes, you have to submit predictions for all of the target languages included in XOR-TYDi and MKQA. A valid submission data is a dictionary with the following keys and the corresponding prediction results in the format discussed in the [Evaluation](#evaluate) section.
-
-- `xor-tydi`
-- `mkqa-ar` 
-- `mkqa-en`
-- `mkqa-es`
-- `mkqa-fi`
-- `mkqa-ja`
-- `mkqa-km`
-- `mkqa-ko`
-- `mkqa-ms`
-- `mkqa-ru`
-- `mkqa-sv`
-- `mkqa-tr`
-- `mkqa-zh_cn`
-
-```
-{"xor-tydi: {...}, "mkqa_ar": {...}, "mkqa_ja": {...}}
-```
-Once you create your submission files, please go to [our competition website]() at eval.ai. 
+Our shared task will be hosted at [eval.ai](https://eval.ai/). Submission details will be available early March with test dataset.
 
 ## Contact
 If you have any questions, please feel free to email (`akari[at]cs.washington.edu`) or start a Github issue with a mention to `@AkariAsai]` or `@shayne-longpre`
