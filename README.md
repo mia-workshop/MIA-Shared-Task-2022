@@ -135,13 +135,13 @@ Due to the difference of the datasets' nature, we will calculate macro-average s
 ### Dependencies
 For non-spacing languages (i.e., Japanese, Khmer and Chinese) we use token-level tokenizers, Mecab, khmernltk and jieba to tokenize both predictions and ground-truth answers.
 
-Please install the following libraries to run the evaluation scripts:
+Please install the required dependencies by running the command below.
+
 ```
-pip install jieba
-pip install khmernltk
-pip install pythainlp
-pip install mecab-python3
+cd eval_scripts
+pip install -r requirements.txt
 ```
+
 
 Please use python 3.x to run the evaluation scripts.
 

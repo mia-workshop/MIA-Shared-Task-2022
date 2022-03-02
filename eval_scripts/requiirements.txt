@@ -1,0 +1,4 @@
+jieba
+khmernltk
+pythainlp
+mecab-python3
