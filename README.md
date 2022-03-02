@@ -188,6 +188,8 @@ wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_mDPR_results_xor_mk
 #### Final results 
 
 - XOR QA (sample prediction file: [`xor_dev_output.json`](https://drive.google.com/file/d/18VKYStO8s0_bW-R-gzdHbCBdOEVdRJIX/view?usp=sharing))
+
+
 | Language | F1 | EM |
 | :-----: | :-------:| :------: |
 | Arabic (`ar`) | 51.3 |  36.0 |
@@ -199,6 +201,8 @@ wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_mDPR_results_xor_mk
 | Telugu (`te`) |  40.2 | 32.1 |
 
 - MKQA (sample prediction file: [`mkqa_dev_output.zip`](https://drive.google.com/file/d/1P1VHyQgdzQW4EeQtwvmy34luwB6xDq06/view?usp=sharing))
+
+
 | Language | F1 | EM |
 | :-----: | :-------:| :------: |
 | Arabic (`ar`) | 8.8  | 5.7 |
