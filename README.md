@@ -1,13 +1,17 @@
 # MIA 2022 Shared Task on Cross-lingual Open-Retrieval Question Answering. 
 This is an official repository for MIA 2022 Shared Task on Cross-lingual Open-Retrieval Question Answering. Please refer the details in [our Shared Task call](https://mia-workshop.github.io/shared_task.html).  
 
+**If you are interested in participating, please sign up at [this form](https://forms.gle/ioWDn4UCKyftTVCk6) to get invitations for our googlegroup!**
+
+### Overview
 Cross-lingual Open Question Answering is a challenging multilingual NLP task, where given questions are written in a user’s preferred language, a system needs to find evidence in large-scale document collections written in many different languages, and return an answer in the user's preferred language, as indicated by their question. 
-​
+
 We evaluate models' performance in 14 languages, 7 of which will not be covered in our training data. 
 
 The full list of the languages:
 - Languages with training data: Arabic (`ar`), Bengali (`bn`), English (`en`), Finnish (`fi`), Japanese (`ja`), Korean (`ko`), Russian (`ru`), Telugu (`te`)
 - Languages without training data: Spanish (`es`), Khmer (`km`), Malay (`ms`), Swedish (`es`), Turkish (`tr`), Chinese (simplified) (`zh-cn`)
+
 ### Quick Links
 
 - [Datasets](#datasets)
