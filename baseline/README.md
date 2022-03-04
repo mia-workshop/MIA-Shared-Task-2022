@@ -24,5 +24,5 @@ wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_mDPR_results_xor_mk
 If you need mDPR results for the training set as well. please contact akari[at]cs.washington.edu. 
 
 Retrieval results for the test set will be available once the official test data is released. 
-### Final MGEN results 
+### Final mGEN results 
 All of the final prediction results of Baseline 1 are available at [MIA2022_sample_predictions](https://drive.google.com/drive/folders/11SewNZ8v_KV4lEE3zFVpHkkBHyuMTI5W?usp=sharing). 
