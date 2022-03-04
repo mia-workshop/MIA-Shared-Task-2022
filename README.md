@@ -11,7 +11,6 @@ The full list of the languages:
 ### Quick Links
 
 - [Datasets](#datasets)
-- [Download](#download)
 - [Evaluate](#evaluate)
 - [Baseline](#baseline)
 - [Submission](#submission)
@@ -61,7 +60,7 @@ Note that the part of the XOR-TyDi data only includes English answers due to the
 }
 ```
 ### Evaluation Data
-The shared task valuation data is originally from [XOR-TyDi QA](https://nlp.cs.washington.edu/xorqa/)([Asai et al., 2021](https://arxiv.org/abs/2010.11856)) and [MKQA](https://github.com/apple/ml-mkqa)[(Longpre et al., 2021)](https://arxiv.org/abs/2007.15207). 
+The shared task valuation data is originally from [XOR-TyDi QA](https://nlp.cs.washington.edu/xorqa/) ([Asai et al., 2021](https://arxiv.org/abs/2010.11856)) and [MKQA](https://github.com/apple/ml-mkqa) [(Longpre et al., 2021)](https://arxiv.org/abs/2007.15207). 
 ​
 For this shared task, we re-split development and test data, and conduct additional answer normalizations, so the number on our shared task data is not directly comparable to the results on those datasets in prior paper. 
 
@@ -83,7 +82,7 @@ Dataset size statistics:
 
 #### MIA 2022 Shared Task MKQA data
 
-The data is available at [data/eval/mkqa_dev.zip]https://github.com/mia-workshop/MIA-Shared-Task-2022/blob/main/data/eval/mkqa_dev.zip). 
+The data is available at [data/eval/mkqa_dev.zip](https://github.com/mia-workshop/MIA-Shared-Task-2022/blob/main/data/eval/mkqa_dev.zip). 
 
 ```
 cd data/eval
