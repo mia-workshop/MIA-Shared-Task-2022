@@ -115,7 +115,17 @@ unzip mia_2022_train_data.jsonl.zip
 | XOR-TyDi QA |  `ru` | 9290 |
 | XOR-TyDi QA |  `te` | 6759 |
 
-We also release the training data for our DPR-based baseline, which is created by collecting training for Natural Questions available at [DPR repo](https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-nq-train.json.gz) and [XOR-TyDI gold paragraph data](https://nlp.cs.washington.edu/xorqa/XORQA_site/data/xorqa_reading_comprehension_format.zip). Please see the details in the `baseline` section. 
+We also release the training data for our DPR-based baseline, which is created by collecting training for Natural Questions available at [DPR repo](https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-nq-train.json.gz) and [XOR-TyDI gold paragraph data](https://nlp.cs.washington.edu/xorqa/XORQA_site/data/xorqa_reading_comprehension_format.zip). 
+The data can be downloaded at [mia2022_shared_task_train_dpr_train.json](https://drive.google.com/file/d/1BZJ2ibAKdm-4xLddh_4D4P1e_G4x3Ogr/view?usp=sharing).
+If we want to download data programmatically from Google Drive, you can use [gdown](https://github.com/wkentaro/gdown)
+
+```py
+import gdown
+url = url = "https://drive.google.com/uc?id=1BZJ2ibAKdm-4xLddh_4D4P1e_G4x3Ogr"
+gdown.download(url)
+```
+Please see more details in the `baseline` section. 
+
 
 #### (2) Unconstrained Setup
 For the **unconstrained** setup, you may use additional human-annotated question answering data. Yet, you must not use additional data from Natural Questions or XOR-TyDi QA for training. 
@@ -167,13 +177,13 @@ You can limit the target languages by setting the `--target` option. You can add
 ## Baseline
 The baseline codes are available at [baseline](baseline). 
 Our baseline model is the state-of-the-art [CORA](https://github.com/AkariAsai/CORA), which runs a multilingual DPR model to retrieve documents from many different languages and then generate the final answers in the target languages using a multilingual seq2seq generation models. We have two versions:
-1. **CORA with iterative training**: We run the publicly available CORA's trained models on our evaluation set. We generate dense embeddings for all of the target languages using their mDPR bi encoders as some of the languages (e.g., Chinese - simplified) are not covered by the CORA's original embeddings. The original COPRA models are trained via their new iterative training framework. We also release the retrieval results of this models [here](). 
+1. **CORA with iterative training**: We run the publicly available CORA's trained models on our evaluation set. We generate dense embeddings for all of the target languages using their mDPR bi encoders as some of the languages (e.g., Chinese - simplified) are not covered by the CORA's original embeddings. The original COPRA models are trained via their new iterative training framework. 
 2. **CORA without iterative training**: We train mDPR and mGEN without iterative training process. 
 3. **BPR (Yamada et al., 2021)**: When we increases the retrieval target to more languages, the inference latency and storage requirements increases quickly. We will plan to introduce a new baseline using Binary Passage Retriever (**BP**R; [Yamada et al., 2021](https://arxiv.org/abs/2106.00882)) as a memory efficient baseline. 
 
 We also release translation results for the evaluation dataset by MT models for MKQA and XOR-TyDi QA evaluation set. 
 
-### Results of Baselines 
+### Prediction results of the baselines
 The results on the development set of Baseline (1) are below. We will add the results of other baselines shortly. The predictions results are available at [MIA2022_sample_predictions](https://drive.google.com/drive/folders/11SewNZ8v_KV4lEE3zFVpHkkBHyuMTI5W?usp=sharing). 
 
 We also release the mDPR retrieval results for dev and test set, and will release the mDPR results for the training set upon request. 
