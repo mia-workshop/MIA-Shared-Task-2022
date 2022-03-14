@@ -41,7 +41,7 @@ def main():
     parser.add_argument("--input_fp", default=None, type=str)
     parser.add_argument("--dpr_data", action="store_true")
     parser.add_argument("--output_fp", default=None, type=str)
-    parser.add_argument("--sample_num", default=10000, type=int)
+    parser.add_argument("--sample_num", default=None, type=int)
 
     args = parser.parse_args()
 
@@ -51,6 +51,8 @@ def main():
     else:
         # read input data in the xor qa format.
         input_data = read_jsonlines(args.input_fp)
+        if args.sample_num is not None:
+            input_data = random.sample(input_data, k=args.sample_num)
     output_data = {}
     print("original input data num:{}".format(len(input_data)))
 
