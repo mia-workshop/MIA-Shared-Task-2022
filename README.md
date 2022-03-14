@@ -1,17 +1,20 @@
 # MIA 2022 Shared Task on Cross-lingual Open-Retrieval Question Answering. 
 This is an official repository for MIA 2022 Shared Task on Cross-lingual Open-Retrieval Question Answering. Please refer the details in [our Shared Task call](https://mia-workshop.github.io/shared_task.html).  
 
+**If you are interested in participating, please sign up at [this form](https://forms.gle/ioWDn4UCKyftTVCk6) to get invitations for our googlegroup!**
+
+### Overview
 Cross-lingual Open Question Answering is a challenging multilingual NLP task, where given questions are written in a user’s preferred language, a system needs to find evidence in large-scale document collections written in many different languages, and return an answer in the user's preferred language, as indicated by their question. 
-​
+
 We evaluate models' performance in 14 languages, 7 of which will not be covered in our training data. 
 
 The full list of the languages:
 - Languages with training data: Arabic (`ar`), Bengali (`bn`), English (`en`), Finnish (`fi`), Japanese (`ja`), Korean (`ko`), Russian (`ru`), Telugu (`te`)
 - Languages without training data: Spanish (`es`), Khmer (`km`), Malay (`ms`), Swedish (`es`), Turkish (`tr`), Chinese (simplified) (`zh-cn`)
+
 ### Quick Links
 
 - [Datasets](#datasets)
-- [Download](#download)
 - [Evaluate](#evaluate)
 - [Baseline](#baseline)
 - [Submission](#submission)
@@ -61,7 +64,7 @@ Note that the part of the XOR-TyDi data only includes English answers due to the
 }
 ```
 ### Evaluation Data
-The shared task valuation data is originally from [XOR-TyDi QA](https://nlp.cs.washington.edu/xorqa/)([Asai et al., 2021](https://arxiv.org/abs/2010.11856)) and [MKQA](https://github.com/apple/ml-mkqa)[(Longpre et al., 2021)](https://arxiv.org/abs/2007.15207). 
+The shared task valuation data is originally from [XOR-TyDi QA](https://nlp.cs.washington.edu/xorqa/) ([Asai et al., 2021](https://arxiv.org/abs/2010.11856)) and [MKQA](https://github.com/apple/ml-mkqa) [(Longpre et al., 2021)](https://arxiv.org/abs/2007.15207). 
 ​
 For this shared task, we re-split development and test data, and conduct additional answer normalizations, so the number on our shared task data is not directly comparable to the results on those datasets in prior paper. 
 
@@ -83,7 +86,7 @@ Dataset size statistics:
 
 #### MIA 2022 Shared Task MKQA data
 
-The data is available at [data/eval/mkqa_dev.zip]https://github.com/mia-workshop/MIA-Shared-Task-2022/blob/main/data/eval/mkqa_dev.zip). 
+The data is available at [data/eval/mkqa_dev.zip](https://github.com/mia-workshop/MIA-Shared-Task-2022/blob/main/data/eval/mkqa_dev.zip). 
 
 ```
 cd data/eval
