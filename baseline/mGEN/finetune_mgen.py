@@ -83,15 +83,6 @@ class CustomAccel(DDPAccelerator):
         self.distributed_port = module.hparams.distributed_port
         os.environ["MASTER_PORT"] = str(self.distributed_port)
         super().init_ddp_connection(global_rank, world_size, is_slurm_managing_tasks)
-        if module.is_rag_model:
-            if module.distributed_retriever == "pytorch":
-                module.model.rag.retriever.init_retrieval(
-                    self.distributed_port)
-            elif module.distributed_retriever == "ray" and global_rank == 0:
-                # For the Ray retriever, only initialize it once when global
-                # rank is 0.
-                module.model.rag.retriever.init_retrieval()
-
 
 class GenerativeQAModule(BaseTransformer):
     mode = "generative_qa"
@@ -178,16 +169,6 @@ class GenerativeQAModule(BaseTransformer):
         self.hparams.git_sha = get_git_info()["repo_sha"]
         self.num_workers = hparams.num_workers
         self.distributed_port = self.hparams.distributed_port
-
-        # For single GPU training, init_ddp_connection is not called.
-        # So we need to initialize the retrievers here.
-        if hparams.gpus <= 1:
-            if hparams.distributed_retriever == "ray":
-                self.model.retriever.init_retrieval()
-            elif hparams.distributed_retriever == "pytorch":
-                self.model.retriever.init_retrieval(self.distributed_port)
-
-        self.distributed_retriever = hparams.distributed_retriever
 
     def forward(self, input_ids, **kwargs):
         return self.model(input_ids, **kwargs)
