@@ -8,8 +8,6 @@ import torch
 from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
 from pytorch_lightning.utilities import rank_zero_only
 
-from utils_rag import save_json
-
 
 def count_trainable_parameters(model):
     model_parameters = filter(lambda p: p.requires_grad, model.parameters())
@@ -121,3 +119,8 @@ class Seq2SeqLoggingCallback(pl.Callback):
         save_json(pl_module.metrics, pl_module.metrics_save_path)
         # Uncommenting this will save val generations
         # return self._write_logs(trainer, pl_module, "valid")
+
+
+def save_json(content, path, indent=4, **json_dump_kwargs):
+    with open(path, "w") as f:
+        json.dump(content, f, indent=indent, **json_dump_kwargs)

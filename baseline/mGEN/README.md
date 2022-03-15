@@ -19,23 +19,12 @@ This scripts convert the DPR output file into mGEN train data format. Please set
 
 ```
 python3 convert_dpr_retrieval_results_to_seq2seq.py \
-    --train_fp /path/to/dpr/output --iterative \
+    --train_fp /path/to/dpr/output/train --dev_fp /path/to/dpr/output/dev  \
     --output_dir /path/to/mgen/data/dir \
     --top_n 10 --add_lang
 ```
 
-If you want to include language tags for the retriever input for the XOR QA training daa, you have to specify the path to the XOR QA files and set `--add_lang` option.
 
-```sh
-python convert_dpr_retrieval_results_to_seq2seq.py \
-    --train_fp /path/to/your/dpr/output/dir \
-    --output_dir /path/to/your/output/dir  \
-    --xor_engspan_train /path/to/your/data/dir/xor_train_retrieve_eng_span.jsonl \
-    --xor_full_train /path/to/your/data/dir/xor_train_full.jsonl \
-    --xor_full_dev /path/to/your/data/dir//xor_dev_full.jsonl \
-    --top_n 10 \
-    --add_lang
-```
 
 ### Training
 Please specify the `model_type`, `model_name_or_path` and `gpus` (the number of GPUs to be used during fine-tuning).
