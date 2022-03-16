@@ -63,7 +63,7 @@ def load_dpr_results(pred_results, top_n=5, split="train", align_dict=None):
         if split == 'train' and align_dict is not None and qid in align_dict:
             answer_entities = align_dict[qid]
             for tgt_lang in target_langs:
-                if tgt_lang in answer_entities and random.random() > 0.75:
+                if tgt_lang in answer_entities and random.random() > 0.5:
                     q_c_a.append({"question": question, "answers": [answer_entities[tgt_lang]],
                                 "context": context, "lang": tgt_lang})
                     auto_nq_count += 1             
