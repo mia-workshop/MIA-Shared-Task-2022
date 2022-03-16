@@ -78,6 +78,7 @@ def main():
     parser.add_argument("--train_fp", default=None, type=str)
     parser.add_argument("--dev_fp", default=None, type=str)
     parser.add_argument("--test_fp", default=None, type=str)
+    parser.add_argument("--ent_fp", default=None, type=str)
     parser.add_argument("--output_dir", default=None, type=str)
     parser.add_argument("--top_n", default=5, type=int)
     parser.add_argument("--add_lang", action="store_true")
@@ -96,7 +97,11 @@ def main():
         test_data = json.load(open(args.test_fp))
 
     if args.train_fp is not None:
-        s2s_train = load_dpr_results(train_data, top_n=args.top_n)
+        if args.ent_fp is not None:
+            align_dict = json.load(open(args.ent_fp))
+            s2s_train = load_dpr_results(train_data, top_n=args.top_n, align_dict=align_dict)
+        else:
+            s2s_train = load_dpr_results(train_data, top_n=args.top_n)
         source_f_train = open(os.path.join(
             args.output_dir, "train.source"), "w")
         target_f_train = open(os.path.join(
