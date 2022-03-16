@@ -26,7 +26,7 @@ def load_dpr_results(pred_results, top_n=5, split="train", align_dict=None):
         answers = item["answers"]
         ctxs = item["ctxs"]
         lang = item["lang"]
-        qid = item["id"]
+        qid = item["q_id"]
         for ctx in ctxs:
             if ctx["has_answer"] == True:
                 has_answer += 1
