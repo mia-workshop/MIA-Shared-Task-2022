@@ -1,3 +1,4 @@
+from enum import auto
 import json
 import random
 import argparse
@@ -6,6 +7,7 @@ import os
 from tqdm import tqdm
 import jsonlines
 
+target_langs =  ['ar', 'bn', 'fi', 'ja', 'ko', 'ru', 'te', 'en', 'es', 'km', 'ms', 'ru', 'sv', 'tr', 'zh_cn']
 
 def read_jsonlines(eval_file_name):
     lines = []
@@ -15,15 +17,16 @@ def read_jsonlines(eval_file_name):
             lines.append(obj)
     return lines
 
-
-def load_dpr_results(pred_results, top_n=5, split="train"):
+def load_dpr_results(pred_results, top_n=5, split="train", align_dict=None):
     q_c_a = []
     has_answer = 0
+    auto_nq_count = 0
     for item in tqdm(pred_results):
         question = item["question"]
         answers = item["answers"]
         ctxs = item["ctxs"]
         lang = item["lang"]
+        qid = item["id"]
         for ctx in ctxs:
             if ctx["has_answer"] == True:
                 has_answer += 1
@@ -57,8 +60,16 @@ def load_dpr_results(pred_results, top_n=5, split="train"):
 
         q_c_a.append({"question": question, "answers": answers,
                       "context": context, "lang": lang})
+        if split == 'train' and align_dict is not None and qid in align_dict:
+            answer_entities = align_dict[qid]
+            for tgt_lang in target_langs:
+                if tgt_lang in answer_entities and random.random() > 0.75:
+                    q_c_a.append({"question": question, "answers": [answer_entities[tgt_lang]],
+                                "context": context, "lang": tgt_lang})
+                    auto_nq_count += 1             
     print("Generated {0} train data; {1} data includes answer string.".format(
         len(q_c_a), has_answer))
+    print("added automatically generated data {0}".format(auto_nq_count))
     return q_c_a
 
 
