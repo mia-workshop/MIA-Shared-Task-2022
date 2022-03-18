@@ -6,6 +6,8 @@ This is an official repository for MIA 2022 Shared Task on Cross-lingual Open-Re
 ### Overview
 Cross-lingual Open Question Answering is a challenging multilingual NLP task, where given questions are written in a user’s preferred language, a system needs to find evidence in large-scale document collections written in many different languages, and return an answer in the user's preferred language, as indicated by their question. 
 
+We have awards + prizes for the best **Unconstrained** system, **Constrained** system, and **Creativity** awards for participants without massive compute/resources but still obtain interesting results!
+
 We evaluate models' performance in 14 languages, 7 of which will not be covered in our training data. 
 
 The full list of the languages:
@@ -14,10 +16,11 @@ The full list of the languages:
 
 ### Quick Links
 
-- [Datasets](#datasets)
+- [Datasets & Track Rules](#datasets)
 - [Evaluate](#evaluate)
 - [Baseline](#baseline)
 - [Submission](#submission)
+- [Shared Task Awards](#shared-task-awards)
 
 ## Datasets
 
@@ -101,6 +104,7 @@ Our training data for the **constrained** setup consists of English open-QA data
 
 The training is available at [data/train/mia_2022_train_data.jsonl.zip](https://github.com/mia-workshop/MIA-Shared-Task-2022/blob/main/data/train/mia_2022_train_data.jsonl.zip). 
 We encourage participants to do data augmentation using Machine Translation or structured knowledge sources (e.g., Wikidata, Wikipedia interlanguage links), and as long as you do not use additional human annotated QA data or data, you submissions will be considered as constrained setup.
+NB: Using external blackbox APIs such as Google Search API / Google Translate API are not permitted in the **constrained setup** for *inference*, but they are permitted for offline data augmentation / training.
 
 ```
 cd data/train
@@ -133,6 +137,7 @@ Please see more details in the `baseline` section.
 #### (2) Unconstrained Setup
 For the **unconstrained** setup, you may use additional human-annotated question answering data. Yet, you must not use additional data from Natural Questions or XOR-TyDi QA for training. 
 Participants using additional human-annotated question-answer data must report this and provide details of the additional resources used for training. 
+NB: Using external blackbox APIs such as Google Search API / Google Translate API is permitted in the **unconstrained setup**. 
 
 ## Evaluate
 Participants will run their systems on the evaluation files (without answer data) and then submit their predictions to our competition site hosted at eval.ai. Systems will first be evaluated using automatic metrics: **Exact match (EM)** and **token-level F1**. Although EM is often used as a primarily evaluate metric for English open-retrieval QA, the risk of surface-level mismatching (Min et al., 2021) can be more pervasive in cross-lingual open-retrieval QA. Therefore, we will use F1 as our primary metric and rank systems using their macro averaged F1 scores.
@@ -253,5 +258,14 @@ To be considered for the prizes, you have to submit predictions for all of the t
 ```
 
 We create a sample prediction file and you can take a look at [submission.json](submission.json).
+
+## Shared Task Awards
+
+There are 3 awards in this shared task, each with Google Cloud credits as prizes.
+
+1. The Best **unconstrained** system obtaining the highest macro-average F1 scores.
+2. The Best **constrained** system obtaining the highest macro-average F1 scores.
+3. **Creativity award(s)**: We plan to give additional award(s) to systems that employ a creative approach to the problem, or undertake interesting experiments to better understand the problem. This award is designed to encourage interesting contributions even from teams without access to the largest models or computational resources. Examples include attempts to improve generalization ability/language equality, reducing model sizes, or understanding the weaknesses in existing systems.
+
 ## Contact
 If you have any questions, please feel free to email (`akari[at]cs.washington.edu`) or start a Github issue with a mention to `@AkariAsai]` or `@shayne-longpre`
