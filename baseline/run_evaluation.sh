@@ -6,11 +6,11 @@ wget https://nlp.cs.washington.edu/xorqa/cora/models/mDPR_mia_train_data_non_ite
 unzip mgen_mia_train_data_non_iterative_augmented.zip
 mkdir embeddings
 cd embeddings
-for i in 0 1 2 3 4 5 6 7;
+for i in 0 1 2 3;
 do 
   wget https://nlp.cs.washington.edu/xorqa/cora/models/embeddings_baseline1/wiki_emb_en_$i 
 done
-for i in 0 1 2 3 4 5 6 7;
+for i in 0 1 2 3;
 do 
   wget https://nlp.cs.washington.edu/xorqa/cora/models/embeddings_baseline1/wiki_emb_others_$i  
 done

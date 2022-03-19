@@ -21,11 +21,11 @@ wget https://nlp.cs.washington.edu/xorqa/cora/models/mDPR_biencoder_best.cpt
 unzip mGEN_model.zip
 mkdir embeddings
 cd embeddings
-for i in 0 1 2 3 4 5 6 7;
+for i in 0 1 2 3;
 do 
   wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_embeddings/wiki_emb_en_$i 
 done
-for i in 0 1 2 3 4 5 6 7;
+for i in 0 1 2 3;
 do 
   wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_embeddings/wiki_emb_xor_$i  
 done
