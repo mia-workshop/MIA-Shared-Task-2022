@@ -3,15 +3,65 @@
 This code is mostly same as the original DPR repository with some minor modifications. The code is based on [Dense Passage Retriever](https://github.com/facebookresearch/DPR) and we modify the code to support more recent version of huggingface transformers. 
 
 ### Installation
-We tested the code with `transformers==3.0.2`, and you may find some issues if you use different version of transformers.
+Please install the dependencies by running the command below: 
 
 ```
-pip install transformers==3.0.2
+pip install -r requirements.txt
 ```
 
+### Download models
+
+- Baseline (1): mDPR trained on our training data (see details below) without iterative training process. 
+
+
+```
+mkdir models
+wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_all_langs_w100.tsv
+wget https://nlp.cs.washington.edu/xorqa/cora/models/mDPR_biencoder_best.cpt
+unzip mGEN_model.zip
+mkdir embeddings
+cd embeddings
+for i in 0 1 2 3 4 5 6 7;
+do 
+  wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_embeddings/wiki_emb_en_$i 
+done
+for i in 0 1 2 3 4 5 6 7;
+do 
+  wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_embeddings/wiki_emb_xor_$i  
+done
+```
+
+- Baseline (2)): [CORA (Asai et al., 2021)](https://github.com/AkariAsai/CORA) public model
+
+```
+mkdir models
+wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_all_langs_w100.tsv
+wget https://nlp.cs.washington.edu/xorqa/cora/models/mDPR_biencoder_best.cpt
+unzip mGEN_model.zip
+mkdir embeddings
+cd embeddings
+for i in 0 1 2 3 4 5 6 7;
+do 
+  wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_embeddings/wiki_emb_en_$i 
+done
+for i in 0 1 2 3 4 5 6 7;
+do 
+  wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_embeddings/wiki_emb_xor_$i  
+done
+for i in 0 1 2 3 4 5 6 7;
+do 
+  wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_embeddings/wiki_others_emb__$i  
+done
+for i in 0 1 2 3 4 5 6 7;
+do 
+  wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_embeddings/wiki_others_emb_ms_tr_km_$i  
+done
+```
 ### Data
-We will add the data used for mDPR training. Please stay tuned!
 
+You can download our mDPR training data [here](https://drive.google.com/drive/folders/1E6BpGum-egmj0PFbix0MaM0X6MBb93Bt?usp=sharing). 
+
+To evaluate your model' retrieval performance, you can download dev data [here](https://drive.google.com/file/d/1BXnU1B_Qohr_WlsC-wxiiiWvXskujfwC/view?usp=sharing). 
 ### Training
 1. Initial training 
 
@@ -41,7 +91,7 @@ for i in {0..7}; do
   nohup python generate_dense_embeddings.py  --model_file /path/to/model/checkpoint --batch_size 64 --ctx_file /path/to/wikipedia/passage/file --shard_id ${i} --num_shards 8 --out_file ./embeddings_multilingual/wikipedia_split/wiki_emb > ./log/nohup.generate_wiki_emb.ser23_3_multi.${i} 2>&1 &
 done
 ```
-Note that when you generate embeddings for the 13 target languages, you may experience out of memory issue when you load the Wikipedia passage tsv file (the total wikipedia passage size is 26GB * 8 GPU). 
+Note that when you generate embeddings for the 13 target languages, you may experience out of memory issue when you load the Wikipedia passage tsv file (the total wikipedia passage size is 24GB * 8 GPU). 
 We recommend you to generate English embeddings first, and then do the same for the remaining languages. 
 
 3. Retrieve Wikipedia passages for train data questions
@@ -73,3 +123,25 @@ python dense_retriever.py \
     --n-docs 20 --validation_workers 1 --batch_size 256 --add_lang
 ```
 Due to the large number of the multilingual passages embeddings, retrieving passages takes more time than English only DPR.
+
+### Retrieved results after mDPR initial training 
+The top 50 passages retrieved by mDPR after initial training for our training, development sets of MKQA and XOR-TyDi QA are available at the following locations.
+
+- Training data
+```
+wget https://nlp.cs.washington.edu/xorqa/cora/models/mia_shared_training_dpr_retrieval_results.json
+```
+
+- XOR QA development data
+
+```
+wget https://nlp.cs.washington.edu/xorqa/cora/models/mia_shared_xorqa_development_dpr_retrieval_results.json
+```
+
+- MKQA development data
+The retrieval results for MKQA subsets are available here:
+
+```
+wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_non_iterative_baselines_mkqa_dev.zip
+unzip mia2022_non_iterative_baselines_mkqa_dev.zip
+```

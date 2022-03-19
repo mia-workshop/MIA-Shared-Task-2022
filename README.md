@@ -1,8 +1,11 @@
 # MIA 2022 Shared Task on Cross-lingual Open-Retrieval Question Answering. 
 This is an official repository for MIA 2022 Shared Task on Cross-lingual Open-Retrieval Question Answering. Please refer the details in [our Shared Task call](https://mia-workshop.github.io/shared_task.html).  
 
-**If you are interested in participating, please sign up at [this form](https://forms.gle/ioWDn4UCKyftTVCk6) to get invitations for our googlegroup!**
+**If you are interested in participating, please sign up at [this form](https://forms.gle/ioWDn4UCKyftTVCk6) to get invitations for our google group!**
 
+### Updates
+- **March 6,  2022**: We released baseline models, train and development data.
+- **March 19,  2022**: We added new baseline (mDPR + mGEN trained on our official data) with prediction results. 
 ### Overview
 Cross-lingual Open Question Answering is a challenging multilingual NLP task, where given questions are written in a user’s preferred language, a system needs to find evidence in large-scale document collections written in many different languages, and return an answer in the user's preferred language, as indicated by their question. 
 
@@ -185,53 +188,49 @@ You can limit the target languages by setting the `--target` option. You can add
 ## Baseline
 The baseline codes are available at [baseline](baseline). 
 Our baseline model is the state-of-the-art [CORA](https://github.com/AkariAsai/CORA), which runs a multilingual DPR model to retrieve documents from many different languages and then generate the final answers in the target languages using a multilingual seq2seq generation models. We have two versions:
-1. **CORA with iterative training**: We run the publicly available CORA's trained models on our evaluation set. We generate dense embeddings for all of the target languages using their mDPR bi encoders as some of the languages (e.g., Chinese - simplified) are not covered by the CORA's original embeddings. The original COPRA models are trained via their new iterative training framework. 
-2. **CORA without iterative training**: We train mDPR and mGEN without iterative training process. 
-3. **BPR (Yamada et al., 2021)**: When we increases the retrieval target to more languages, the inference latency and storage requirements increases quickly. We will plan to introduce a new baseline using Binary Passage Retriever (**BP**R; [Yamada et al., 2021](https://arxiv.org/abs/2106.00882)) as a memory efficient baseline. 
 
-We also release translation results for the evaluation dataset by MT models for MKQA and XOR-TyDi QA evaluation set. 
+1. **multilingual DPR + multilingual seq2seq (CORA without iterative training)**: We train mDPR and mGEN without iterative training process. We first train mDPR, retrieve top passages using the trained mDPR, and then fine-tuned mGEN after we preprocess and augment NQ data using WikiData as in the original CORA paper. Due to the computational costs, we do not re-train the CORA with iterative training on the new data and languages. 
+
+2. **CORA with iterative training**: We run the publicly available CORA's trained models on our evaluation set. We generate dense embeddings for all of the target languages using their mDPR bi encoders as some of the languages (e.g., Chinese - simplified) are not covered by the CORA's original embeddings. There might be some minor differences in data preprocessing of the original CORA paper and our new data. 
 
 ### Prediction results of the baselines
-The results on the development set of Baseline (1) are below. We will add the results of other baselines shortly. The predictions results are available at [MIA2022_sample_predictions](https://drive.google.com/drive/folders/11SewNZ8v_KV4lEE3zFVpHkkBHyuMTI5W?usp=sharing). 
+We release the final prediction results as well as the intermediate retrieval results for both train and dev sets. Please see the details at [the baseline README.md](baseline/README.md)
 
-We also release the mDPR retrieval results for dev and test set, and will release the mDPR results for the training set upon request. 
-You can download the mDPR results from: 
-```
-wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_mDPR_results_xor_mkqa_dev.zip
-```
+#### Final results F1 | EM |
+The final results of Baselines 2 and 3 are shown below. The final macro average scores of those baselines are: 
+- Baseline 1 = `(38.9 + 18.1 ) / 2`= **28.5** 
+- Baseline 2 = `(39.8 + 17.4) / 2`= **28.6** 
 
-#### Final results 
+- XOR QA 
 
-- XOR QA (sample prediction file: [`xor_dev_output.json`](https://drive.google.com/file/d/18VKYStO8s0_bW-R-gzdHbCBdOEVdRJIX/view?usp=sharing))
+| Language | (2) F1 | (2) EM |  (1) F1 | (1) EM |
+| :-----: | :-------:| :------: |  :-------:| :------: |
+| Arabic (`ar`) | 51.3 |  36.0 | 49.7 |  33.7 |
+| Bengali (`bn`) | 28.7 | 20.2 | 29.2 | 21.2 |
+| Finnish (`fi`) | 44.4 | 35.7 | 42.7 | 32.9  |
+| Japanese (`ja` )| 43.2 | 32.2 | 41.2 | 29.6 |
+| Korean (`ko`) |  29.8 | 23.7 | 30.6 | 24.5 |
+| Russian (`ru`) |  40.7 | 31.9 | 40.2 | 31.1 |
+| Telugu (`te`) |  40.2 | 32.1 | 38.6 | 30.7 |
+| Macro-Average |  39.8 | 30.3 | 38.9| 26.8 |
 
+- MKQA
 
-| Language | F1 | EM |
-| :-----: | :-------:| :------: |
-| Arabic (`ar`) | 51.3 |  36.0 |
-| Bengali (`bn`) | 28.7 | 20.2 |
-| Finnish (`fi`) | 44.4 | 35.7 |
-| Japanese (`ja` )| 43.2 | 32.2 |
-| Korean (`ko`) |  29.8 | 23.7 |
-| Russian (`ru`) |  40.7 | 31.9 |
-| Telugu (`te`) |  40.2 | 32.1 |
-
-- MKQA (sample prediction file: [`mkqa_dev_output.zip`](https://drive.google.com/file/d/1P1VHyQgdzQW4EeQtwvmy34luwB6xDq06/view?usp=sharing))
-
-
-| Language | F1 | EM |
-| :-----: | :-------:| :------: |
-| Arabic (`ar`) | 8.8  | 5.7 |
-| English (`en`) | 27.9 | 24.5 |
-| Spanish (`es`) | 24.9 | 20.9 |
-| Finnish (`fi`) | 23.3 | 20.0 |
-| Japanese (`ja`) | 15.2 | 6.3 |
-| Khmer (`km`) |  5.7 | 4.9 |
-| Korean (`ko`) |  8.3 | 6.3 |
-| Malaysian (`ms`) | 22.6  |19.7 |
-| Russian (`ru`) | 14.0  | 9.4 |
-| Swedish (`sv`) |  24.1 | 21.1|
-| Turkish (`tr`) |  20.6 | 16.7 |
-| Chinese-simplified (`zh_cn`) | 13.1  | 6.1 |
+| Language | (2) F1 | (2) EM | (1) F1 | (1) EM |
+| :-----: | :-------:| :------: | :-------:| :------: |
+| Arabic (`ar`) | 8.8  | 5.7 | 8.9 | 5.1 |
+| English (`en`) | 27.9 | 24.5 | 33.9 | 24.9 |
+| Spanish (`es`) | 24.9 | 20.9 | 25.1 | 19.3 |
+| Finnish (`fi`) | 23.3 | 20.0 | 21.1 | 17.4 |
+| Japanese (`ja`) | 15.2 | 6.3 | 15.3 | 5.8 |
+| Khmer (`km`) |  5.7 | 4.9 | 6.0 | 4.7 |
+| Korean (`ko`) |  8.3 | 6.3 |  6.7 | 4.7 |
+| Malaysian (`ms`) | 22.6  |19.7 | 24.6 | 19.7 |
+| Russian (`ru`) | 14.0  | 9.4 |  15.6  | 10.6 |
+| Swedish (`sv`) |  24.1 | 21.1| 25.5 | 20.6|
+| Turkish (`tr`) |  20.6 | 16.7 | 20.4 |  16.1 |
+| Chinese-simplified (`zh_cn`) | 13.1  | 6.1 | 13.7  | 5.7 |
+| Macro-Average  | 17.4 | 13.5 |  18.1  | 12.9 |
 
 ## Submission
 Our shared task is hosted at [eval.ai](https://eval.ai/web/challenges/challenge-page/1638/overview). 

@@ -2,5 +2,5 @@ faiss-cpu >= 1.6.3
 datasets >= 1.0.1
 psutil >= 5.7.0
 torch >= 1.4.0
-transformers==4.2.1　ｔａp';olkjhgcxz   l; 
+transformers==4.2.1
 pytorch-lightning==1.0.4

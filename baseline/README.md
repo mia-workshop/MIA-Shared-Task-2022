@@ -1,12 +1,16 @@
 # Baselines for MIA 2022 Shared Task
 
-Our primary baseline model is the state-of-the-art [CORA](https://github.com/AkariAsai/CORA), which runs a multilingual DPR model to retrieve documents from many different languages and then generate the final answers in the target languages using a multilingual seq2seq generation models. We have two versions:
-1. **CORA with iterative training**: We run the publicly available CORA's trained models on our evaluation set. We generate dense embeddings for all of the target languages using their mDPR bi encoders as some of the languages (e.g., Chinese - simplified) are not covered by the CORA's original embeddings. The original COPRA models are trained via their new iterative training framework. 
-2. **CORA without iterative training**: We train mDPR and mGEN without iterative training process. The trained models will be released shortly,
+Our primary baseline model is the state-of-the-art [CORA](https://github.com/AkariAsai/CORA), which runs a multilingual DPR (mDPR) model to retrieve documents from many different languages and then generate the final answers in the target languages using a multilingual seq2seq generation models (mGEN). 
 
-When we increases the retrieval target to more languages, the inference latency and storage requirements increases quickly. We plan to introduce a new baseline using Binary Passage Retriever (**BP**R; [Yamada et al., 2021](https://arxiv.org/abs/2106.00882)) as a memory efficient baseline, based on the official implementation available at [soseki](https://github.com/studio-ousia/soseki).
+We have two versions:
+1. **(Baseline 1) mDPR + mGEN (CORA w/o iterative training)**: We train mDPR and mGEN following the procedures in the CORA paper using the MIA2022 shared task official training and development data. We do not conduct iterative training.      
+The experimental results can be reproduced by `run_evaluation.sh`. This is our primary baseline. 
 
-## Baseline 1: Quick evaluation
+2. **(Baseline 2) CORA (trained models)**:
+We run the models available at the CORA library on our evaluation data. For the languages that are not originally covered by the CORA repository, we run mDPR to generate passage embeddings.      
+THe experimental results can be reproduced by `run_evaluation_cora.sh`.
+
+## Quick evaluation
 To reproduce the main results of the baseline 1, please run the following script.
 
 ```
@@ -14,15 +18,32 @@ bash run_evaluation.sh
 ```
 ## Baseline predictions
 
-### mDPR retrieval results
-To encourage those who are more interested in improving answer generation / reader components after retrieval, we release the retrieval results for the MKQA and XOR TyDi QA data. All of the retrieval results for the development set can be downloaded by running the command below. 
+### Intermediate results -- mDPR retrieval results 
+
+To encourage those who are more interested in improving answer generation / reader components after retrieval, we release the retrieval results for the MKQA and XOR TyDi QA data. All of the retrieval results for the training and development set can be downloaded by running the command below. 
+
+- Training data
 
 ```
-wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_mDPR_results_xor_mkqa_dev.zip
+wget https://nlp.cs.washington.edu/xorqa/cora/models/mia_shared_training_dpr_retrieval_results.json
 ```
 
-If you need mDPR results for the training set as well. please contact akari[at]cs.washington.edu. 
+- XOR QA Development data
+```
+wget https://nlp.cs.washington.edu/xorqa/cora/models/mia_shared_xorqa_development_dpr_retrieval_results.json
+```
+
+
+- MKQA development data
+```
+wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_non_iterative_baselines_mkqa_dev.zip
+unzip mia2022_non_iterative_baselines_mkqa_dev.zip
+```
 
 Retrieval results for the test set will be available once the official test data is released. 
 ### Final mGEN results 
-All of the final prediction results of Baseline 1 are available at [MIA2022_sample_predictions](https://drive.google.com/drive/folders/11SewNZ8v_KV4lEE3zFVpHkkBHyuMTI5W?usp=sharing). 
+
+- Baseline 1: (link will be updated soon!)
+
+
+- Baseline 2: [MIA2022_sample_predictions](https://drive.google.com/drive/folders/11SewNZ8v_KV4lEE3zFVpHkkBHyuMTI5W?usp=sharing). 
