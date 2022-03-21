@@ -14,7 +14,6 @@ from collections import Counter
 import string
 import re
 import argparse
-import sys
 
 wakati = MeCab.Tagger("-Owakati")
 
@@ -138,19 +137,12 @@ def main():
                         default=None, type=str)
     parser.add_argument("--pred_file",
                         default=None, type=str)
-    parser.add_argument("--txt_file", action="store_true")
 
     args = parser.parse_args()
 
     dataset = read_jsonlines(args.data_file)
-    if args.txt_file is True:
-        tmp_preds = open(args.pred_file).read().split("\n")
-        predictions = {} 
-        for item, pred in zip(dataset, tmp_preds):
-            predictions[item["id"]] = pred
-    else:
-        with open(args.pred_file) as prediction_file:
-            predictions = json.load(prediction_file)
+    with open(args.pred_file) as prediction_file:
+        predictions = json.load(prediction_file)
 
     results = calculate_f1_em_bleu(dataset, predictions)
 
