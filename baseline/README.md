@@ -41,9 +41,10 @@ unzip mia2022_non_iterative_baselines_mkqa_dev.zip
 ```
 
 Retrieval results for the test set will be available once the official test data is released. 
-### Final mGEN results 
 
-- Baseline 1: (link will be updated soon!)
+### Final prediction results
+You can download final predictions from the following links. 
 
+- Baseline 1:[MIA2022_Baseline 1 sample_predictions](https://drive.google.com/drive/folders/14Xv6enk7j4d3QKTNbB5jGjaColNffwW_?usp=sharing). 
 
-- Baseline 2: [MIA2022_sample_predictions](https://drive.google.com/drive/folders/11SewNZ8v_KV4lEE3zFVpHkkBHyuMTI5W?usp=sharing). 
+- Baseline 2: [MIA2022_Baseline 2 sample_predictions](https://drive.google.com/drive/folders/1ePQjLOWUNiF5mr6leAhw8OG-o1h55i75?usp=sharing). 
