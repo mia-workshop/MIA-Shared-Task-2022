@@ -6,6 +6,7 @@ This is an official repository for MIA 2022 Shared Task on Cross-lingual Open-Re
 ### Updates
 - **March 6,  2022**: We released baseline models, train and development data.
 - **March 19,  2022**: We added new baseline (mDPR + mGEN trained on our official data) with prediction results. 
+- **March 21,  2022**: We released test data files at [data/eval/mia_2022_test_xorqa_without_answers.jsonl (XOR test data without answer data)](data/eval/mia_2022_test_xorqa_without_answers.jsonl) and [data/eval/mkqa_test_without_answers.zip (MKQA test data without answer data)](data/eval/mkqa_test_without_answers.zip).
 ### Overview
 Cross-lingual Open Question Answering is a challenging multilingual NLP task, where given questions are written in a user’s preferred language, a system needs to find evidence in large-scale document collections written in many different languages, and return an answer in the user's preferred language, as indicated by their question. 
 
