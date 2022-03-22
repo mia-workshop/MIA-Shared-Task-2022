@@ -58,10 +58,27 @@ do
 done
 ```
 ### Data
+#### Training data using DPR's NQ training data + XOR-TyDi QA gold paragraph data
 
-You can download our mDPR training data [here](https://drive.google.com/drive/folders/1E6BpGum-egmj0PFbix0MaM0X6MBb93Bt?usp=sharing). 
+```
+wget  https://nlp.cs.washington.edu/xorqa/cora/data/base_mdpr_train_dev_data/mia2022_mdpr_train.json
+wget  https://nlp.cs.washington.edu/xorqa/cora/data/base_mdpr_train_dev_data/mia2022_mdpr_dev.json
+```
 
-To evaluate your model' retrieval performance, you can download dev data [here](https://drive.google.com/file/d/1BXnU1B_Qohr_WlsC-wxiiiWvXskujfwC/view?usp=sharing). 
+The original data is from 
+- [DPR's Natural Questions train data](https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-nq-train.json.gz)
+- [XOR-TyDiQA's gold paragraph data](https://nlp.cs.washington.edu/xorqa/XORQA_site/data/trans_data_all_langs.zip)
+
+If you further augment your training data using them or the Natural Questions / TyDi QA, please make sure that you **do not** use any additional QA data from those datasets (i.e., questions whose question ids are not included in our official training data).  
+#### Training data with adversarial paragraphs
+Recent work has shown that using a trained DPR model to mine harder negative passages can improve retrieval performance. See detailed discussions at [the original DPR repository](https://github.com/facebookresearch/DPR#new-march-2021-retrieval-model).          
+
+We create additional training and dev data set by augmenting positive and negative passages from the top 50 retrieval results of our mDPR models. Please see the details of this process at [create_adverarial_data.py](create_adverarial_data.py). 
+
+```
+wget  https://nlp.cs.washington.edu/xorqa/cora/data/mia_adversarial_mdpr/mia_train_adversarial.json
+wget  https://nlp.cs.washington.edu/xorqa/cora/data/mia_adversarial_mdpr/mia_xor_dev_adversarial.json
+```
 ### Training
 1. Initial training 
 
