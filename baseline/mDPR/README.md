@@ -62,7 +62,7 @@ done
 
 ```
 wget  https://nlp.cs.washington.edu/xorqa/cora/data/base_mdpr_train_dev_data/mia2022_mdpr_train.json
-wget  https://nlp.cs.washington.edu/xorqa/cora/data/base_mdpr_train_dev_data/mia2022_mdpr_dev.json
+wget  https://nlp.cs.washington.edu/xorqa/cora/data/base_mdpr_train_dev_data/mia2022_mdpr_xor_dev.json
 ```
 
 The original data is from 
