@@ -143,6 +143,33 @@ For the **unconstrained** setup, you may use additional human-annotated question
 Participants using additional human-annotated question-answer data must report this and provide details of the additional resources used for training. 
 NB: Using external blackbox APIs such as Google Search API / Google Translate API is permitted in the **unconstrained setup**. 
 
+
+### Wikipedia Dumps
+Following the original XOR-TyDi QA datasets, our baselines use the Wikipedia dump from February 2019. For the languages whose 2019 February dump is no longer available, we use October 2021 data.
+
+#### Link to the Wikipedia dumps
+You can find the links of web archive version of Wikipedia dumps at the TyDi QA repository below:
+[TyDi QA's source data list](https://github.com/google-research-datasets/tydiqa/blob/master/README.md#source-data)
+
+
+For the languages that are not listed here, here are the links:
+
+Swedish Wikipedia
+Spanish Wikipedia
+Chinese (simplified Wikipedia
+Malay Wikipedia
+Khmer Wikipedia
+Turkish Wikipedia
+
+
+#### Preprocessed data in the DPR (100-token) format
+You can download preprocessed text data where we split each article in all target languages into 100 token chuncks and concatenate all of them. The download links are below:
+
+```
+wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_all_langs_w100.tsv
+````
+We will add this instruction in our README. Section for your feedback! Let us know if you have any more questions. The code used to preprocess Wikipedia is at baseline/wikipedia_preprocess.
+
 ## Evaluate
 Participants will run their systems on the evaluation files (without answer data) and then submit their predictions to our competition site hosted at eval.ai. Systems will first be evaluated using automatic metrics: **Exact match (EM)** and **token-level F1**. Although EM is often used as a primarily evaluate metric for English open-retrieval QA, the risk of surface-level mismatching (Min et al., 2021) can be more pervasive in cross-lingual open-retrieval QA. Therefore, we will use F1 as our primary metric and rank systems using their macro averaged F1 scores.
 
@@ -157,7 +184,6 @@ Please install the dependencies by running the command below before running the 
 cd eval_scripts
 pip install -r requirements.txt
 ```
-
 
 Please use python 3.x to run the evaluation scripts.
 
@@ -184,7 +210,6 @@ For MKQA, you can run the command above for each language or you can run the com
 python eval_mkqa_all.py --data_dir /path/to/data/dir --pred_dir /path/to/pred/files/dir 
 ```
 You can limit the target languages by setting the `--target` option. You can add the target languages' language codes (e.g., `--target en es sw`)
-
 
 ## Baseline
 The baseline codes are available at [baseline](baseline). 
@@ -245,7 +270,7 @@ Our shared task is hosted at [eval.ai](https://eval.ai/web/challenges/challenge-
 
 ### Submission file format
 To be considered for the prizes, you have to submit predictions for all of the target languages included in XOR-TYDi and MKQA. A valid submission data is a dictionary with the following keys and the corresponding prediction results in the format discussed in the [Evaluation](#evaluate) section.
-​
+
 - `xor-tydi`
 - `mkqa-ar` 
 - `mkqa-en`
