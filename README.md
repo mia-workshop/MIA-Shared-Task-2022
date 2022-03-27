@@ -247,7 +247,7 @@ The final results of Baselines 2 and 3 are shown below. The final macro average 
 | Korean (`ko`) |  29.8 | 23.7 | 30.6 | 24.5 |
 | Russian (`ru`) |  40.7 | 31.9 | 40.2 | 31.1 |
 | Telugu (`te`) |  40.2 | 32.1 | 38.6 | 30.7 |
-| Macro-Average |  39.8 | 30.3 | 38.9| 26.8 |
+| Macro-Average |  39.8 | 30.3 | 38.9| 29.1 |
 
 - MKQA
 
