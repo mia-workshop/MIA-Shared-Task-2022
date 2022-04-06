@@ -27,7 +27,7 @@ do
 done
 for i in 0 1 2 3;
 do 
-  wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_embeddings/wiki_emb_xor_$i  
+  wget https://nlp.cs.washington.edu/xorqa/cora/models/embeddings_baseline1/wiki_emb_others_$i   
 done
 ```
 
