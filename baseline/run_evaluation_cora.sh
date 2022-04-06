@@ -8,19 +8,19 @@ mkdir embeddings
 cd embeddings
 for i in 0 1 2 3 4 5 6 7;
 do 
-  wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_embeddings/wiki_emb_en_$i 
+  wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_embeddings/embeddings/wiki_emb_en_$i 
 done
 for i in 0 1 2 3 4 5 6 7;
 do 
-  wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_embeddings/wiki_emb_xor_$i  
+  wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_embeddings/embeddings/wiki_emb_xor_$i  
 done
 for i in 0 1 2 3 4 5 6 7;
 do 
-  wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_embeddings/wiki_others_emb__$i  
+  wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_embeddings/embeddings/wiki_others_emb__$i  
 done
 for i in 0 1 2 3 4 5 6 7;
 do 
-  wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_embeddings/wiki_others_emb_ms_tr_km_$i  
+  wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_embeddings/embeddings/wiki_others_emb_ms_tr_km_$i  
 done
 cd ../..
 
