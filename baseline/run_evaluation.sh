@@ -8,7 +8,7 @@ mkdir embeddings
 cd embeddings
 for i in 0 1 2 3;
 do 
-  wget https://nlp.cs.washington.edu/xorqa/cora/models/embeddings_baseline1/wiki_emb_en_$i 
+  wget https://nlp.cs.washington.edu/xorqa/cora/models/embeddings_baseline1/wiki_emb_$i 
 done
 for i in 0 1 2 3;
 do 

@@ -27,7 +27,7 @@ do
 done
 for i in 0 1 2 3;
 do 
-  wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_shared_task_embeddings/wiki_emb_xor_$i  
+  wget https://nlp.cs.washington.edu/xorqa/cora/models/embeddings_baseline1/wiki_emb_others_$i   
 done
 ```
 
@@ -62,7 +62,7 @@ done
 
 ```
 wget  https://nlp.cs.washington.edu/xorqa/cora/data/base_mdpr_train_dev_data/mia2022_mdpr_train.json
-wget  https://nlp.cs.washington.edu/xorqa/cora/data/base_mdpr_train_dev_data/mia2022_mdpr_dev.json
+wget  https://nlp.cs.washington.edu/xorqa/cora/data/base_mdpr_train_dev_data/mia2022_mdpr_xor_dev.json
 ```
 
 The original data is from 
