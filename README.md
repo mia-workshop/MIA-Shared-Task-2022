@@ -18,7 +18,7 @@ We evaluate models' performance in 14 languages, 7 of which will not be covered 
 
 The full list of the languages:
 - Languages with training data: Arabic (`ar`), Bengali (`bn`), English (`en`), Finnish (`fi`), Japanese (`ja`), Korean (`ko`), Russian (`ru`), Telugu (`te`)
-- Languages without training data: Spanish (`es`), Khmer (`km`), Malay (`ms`), Swedish (`es`), Turkish (`tr`), Chinese (simplified) (`zh-cn`)
+- Languages without training data: Spanish (`es`), Khmer (`km`), Malay (`ms`), Swedish (`sv`), Turkish (`tr`), Chinese (simplified) (`zh-cn`)
 
 ### Quick Links
 
