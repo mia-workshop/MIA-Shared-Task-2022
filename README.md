@@ -225,14 +225,15 @@ Our baseline model is the state-of-the-art [CORA](https://github.com/AkariAsai/C
 2. **CORA with iterative training**: We run the publicly available CORA's trained models on our evaluation set. We generate dense embeddings for all of the target languages using their mDPR bi encoders as some of the languages (e.g., Chinese - simplified) are not covered by the CORA's original embeddings. There might be some minor differences in data preprocessing of the original CORA paper and our new data. 
 
 ### Prediction results of the baselines
-We release the final prediction results as well as the intermediate retrieval results for both train and dev sets. 
+We've released the final prediction results as well as the intermediate retrieval results for train, dev and test sets. 
 
+To download the data, follow the instructions at [baseline README](baseline#intermediate-results----mdpr-retrieval-results). 
 #### Final Prediction results
 - Baseline 1:[MIA2022_Baseline 1 sample_predictions](https://drive.google.com/drive/folders/14Xv6enk7j4d3QKTNbB5jGjaColNffwW_?usp=sharing). 
 - Baseline 2: [MIA2022_Baseline 2 sample_predictions](https://drive.google.com/drive/folders/1ePQjLOWUNiF5mr6leAhw8OG-o1h55i75?usp=sharing). 
 
-#### INtermediate Retrieval Results
-See the insturctions at [the Baseline's README](https://github.com/mia-workshop/MIA-Shared-Task-2022/tree/main/baseline#intermediate-results----mdpr-retrieval-results). 
+#### Intermediate Retrieval Results
+See the Instructions at [the Baseline's README](https://github.com/mia-workshop/MIA-Shared-Task-2022/tree/main/baseline#intermediate-results----mdpr-retrieval-results). 
 
 #### Final results F1 | EM |
 The final results of Baselines 2 and 3 are shown below. The final macro average scores of those baselines are: 

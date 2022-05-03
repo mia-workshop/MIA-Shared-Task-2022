@@ -40,6 +40,12 @@ wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_non_iterative_basel
 unzip mia2022_non_iterative_baselines_mkqa_dev.zip
 ```
 
+- Test data
+```
+wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_non_iterative_baselines_mkqa_dev.zip
+unzip mia2022_non_iterative_baselines_mkqa_dev.zip
+```
+
 Retrieval results for the test set will be available once the official test data is released. 
 
 ### Final prediction results

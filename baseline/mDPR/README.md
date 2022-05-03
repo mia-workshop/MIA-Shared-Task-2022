@@ -162,3 +162,10 @@ The retrieval results for MKQA subsets are available here:
 wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_non_iterative_baselines_mkqa_dev.zip
 unzip mia2022_non_iterative_baselines_mkqa_dev.zip
 ```
+
+- Test data
+
+```
+wget https://nlp.cs.washington.edu/xorqa/cora/models/retriever_results_test_no_answers.zip
+unzip retriever_results_test_no_answers.zip
+```
