@@ -164,7 +164,6 @@ wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_non_iterative_basel
 unzip mia2022_non_iterative_baselines_mkqa_dev.zip
 ```
 
-
 - Test data
 
 ```
