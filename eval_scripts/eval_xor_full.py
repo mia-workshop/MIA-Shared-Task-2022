@@ -22,7 +22,7 @@ lang_dic = {'telugu': 'te', 'swahili': 'sw', 'thai': 'th', 'finnish': 'fi', 'ind
             "korean": "ko", "spanish": "es", "hebrew": "he", "swedish": "sv", "danish": "da", "german": "de",
             "hungarian": "hu", "italian": "it", "khmer": "km", "malay": "ms", "dutch": "nl",
             "norwegian": "no", "portuguese": "pt", "turkish": "tr", "vietnamese": "vi", "french": "fr", "polish": "pl",
-            "chinese (simplified)": "zh_cn",  "chinese (hong kong)": 'zh_hk', "chinese (traditional)": "zh_tw"}
+            "chinese (simplified)": "zh_cn",  "chinese (hong kong)": 'zh_hk', "chinese (traditional)": "zh_tw", "tamil": "ta", "tagalog": "tl"}
 
 
 def read_jsonlines(eval_file_name):

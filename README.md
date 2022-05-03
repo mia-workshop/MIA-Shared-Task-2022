@@ -7,18 +7,20 @@ This is an official repository for MIA 2022 Shared Task on Cross-lingual Open-Re
 - **March 6,  2022**: We released baseline models, train and development data.
 - **March 19,  2022**: We added new baseline (mDPR + mGEN trained on our official data) with prediction results. 
 - **March 21,  2022**: We released test data files at [data/eval/mia_2022_test_xorqa_without_answers.jsonl (XOR test data without answer data)](data/eval/mia_2022_test_xorqa_without_answers.jsonl) and [data/eval/mkqa_test_without_answers.zip (MKQA test data without answer data)](data/eval/mkqa_test_without_answers.zip).
-- **March 24,  2022**: Our submission site on EvalAI is now up! You can now test your predictions on the dev set, and submissions on the test set will be open on April 1.  
+- **March 24,  2022**: [Our submission site](https://eval.ai/web/challenges/challenge-page/1638/my-submission) on EvalAI is now up! You can now test your predictions on the dev set, and submissions on the test set will be open on April 1. Link to the eval.ai competition site 
+- **May 3,  2022**: We've released the test data in two surprise languages, **Tamil and Tagalog**. Please download the data at `eval/data` directory. [Tagalog data](data/eval/mia2022_test_surprise_tagalog_without_answers.jsonl) | [Tamil data](data/eval/mia2022_test_surprise_tamil_without_answers.jsonl). 
 
 ### Overview
 Cross-lingual Open Question Answering is a challenging multilingual NLP task, where given questions are written in a user’s preferred language, a system needs to find evidence in large-scale document collections written in many different languages, and return an answer in the user's preferred language, as indicated by their question. 
 
 We have awards + prizes for the best **Unconstrained** system, **Constrained** system, and **Creativity** awards for participants without massive compute/resources but still obtain interesting results!
 
-We evaluate models' performance in 14 languages, 7 of which will not be covered in our training data. 
+We evaluate models' performance in ~~14~~16 languages, ~~7~~9 of which will not be covered in our training data. 7 languages have development data, while 2 surprise languages released two weeks before submission deadline does not have any development data. 
 
 The full list of the languages:
 - Languages with training data: Arabic (`ar`), Bengali (`bn`), English (`en`), Finnish (`fi`), Japanese (`ja`), Korean (`ko`), Russian (`ru`), Telugu (`te`)
 - Languages without training data: Spanish (`es`), Khmer (`km`), Malay (`ms`), Swedish (`es`), Turkish (`tr`), Chinese (simplified) (`zh-cn`)
+- *New!!* Surprise languages: Tagalog (`tl`), Tamil (`ta`)
 
 ### Quick Links
 
@@ -286,6 +288,8 @@ To be considered for the prizes, you have to submit predictions for all of the t
 - `mkqa-sv`
 - `mkqa-tr`
 - `mkqa-zh_cn`
+- `sup_ta`
+- `sup_tl`
 ​
 ```
 {"xor-tydi: {...}, "mkqa-ar": {...}, "mkqa-ja": {...}}
