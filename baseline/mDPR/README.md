@@ -70,6 +70,7 @@ The original data is from
 - [XOR-TyDiQA's gold paragraph data](https://nlp.cs.washington.edu/xorqa/XORQA_site/data/trans_data_all_langs.zip)
 
 If you further augment your training data using them or the Natural Questions / TyDi QA, please make sure that you **do not** use any additional QA data from those datasets (i.e., questions whose question ids are not included in our official training data).  
+
 #### Training data with adversarial paragraphs
 Recent work has shown that using a trained DPR model to mine harder negative passages can improve retrieval performance. See detailed discussions at [the original DPR repository](https://github.com/facebookresearch/DPR#new-march-2021-retrieval-model).          
 
@@ -161,4 +162,11 @@ The retrieval results for MKQA subsets are available here:
 ```
 wget https://nlp.cs.washington.edu/xorqa/cora/models/mia2022_non_iterative_baselines_mkqa_dev.zip
 unzip mia2022_non_iterative_baselines_mkqa_dev.zip
+```
+
+- Test data 
+
+```
+wget https://nlp.cs.washington.edu/xorqa/cora/models/retriever_results_test_no_answers.zip
+unzip retriever_results_test_no_answers.zip
 ```
