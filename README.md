@@ -297,7 +297,7 @@ To be considered for the prizes, you have to submit predictions for all of the t
 {"xor-tydi: {...}, "mkqa-ar": {...}, "mkqa-ja": {...}}
 ```
 
-We create a sample prediction file and you can take a look at [submission.json](submission.json).
+We've released our baseline systems' prediction results in the submission format at [submission.json (dev data predictions)](sample_predictions/submission.json) and [submission_test.json (test data predictions)](sample_predictions/submission_test.json).  
 
 ## Shared Task Awards
 
@@ -308,4 +308,4 @@ There are 3 awards in this shared task, each with Google Cloud credits as prizes
 3. **Creativity award(s)**: We plan to give additional award(s) to systems that employ a creative approach to the problem, or undertake interesting experiments to better understand the problem. This award is designed to encourage interesting contributions even from teams without access to the largest models or computational resources. Examples include attempts to improve generalization ability/language equality, reducing model sizes, or understanding the weaknesses in existing systems.
 
 ## Contact
-If you have any questions, please feel free to email (`akari[at]cs.washington.edu`) or start a Github issue with a mention to `@AkariAsai]` or `@shayne-longpre`
+If you have any questions, please feel free to email (`akari[at]cs.washington.edu`) or start a Github issue with a mention to `@AkariAsai` or `@shayne-longpre`
