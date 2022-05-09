@@ -158,21 +158,18 @@ def main():
     if args.test_fp is not None:
         s2s_test = load_dpr_results(test_data, top_n=args.top_n, split="test")
         source_f_test = open(os.path.join(args.output_dir, "test.source"), "w")
-        target_f_test = open(os.path.join(args.output_dir, "test.target"), "w")
 
         for item in s2s_test:
             source_f_test.write("<Q>: {0} <P>:{1}".format(
                 item["question"], item["context"]).replace("\n", "") + "\n")
-            target_f_test.write(item["answers"][0].replace("\n", "") + "\n")
 
         source_f_test.close()
-        target_f_test.close()
 
         with open(os.path.join(args.output_dir, "gold_para_qa_data_test.tsv"), "w") as out_file:
             tsv_writer = csv.writer(out_file, delimiter='\t')
             for item in s2s_test:
                 tsv_writer.writerow(["<Q>: {0} <P>:{1}".format(
-                    item["question"], item["context"]), item["answers"]])
+                    item["question"], item["context"])])
 
 
 if __name__ == "__main__":
