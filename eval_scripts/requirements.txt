@@ -1,4 +1,4 @@
 jieba
-khmernltk
+khmer-nltk
 pythainlp
 mecab-python3
